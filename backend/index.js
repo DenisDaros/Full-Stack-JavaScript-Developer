@@ -1,13 +1,17 @@
-const express = require("express")
-const app = express()
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 
-require('dotenv').config()
+const app = express();
 
-app.use(express.json())
+require('dotenv').config();
 
-
+const productRouter = require('./src/routes/product.router');
 const loginRouter = require('./src/routes/login.router');
 
-app.use(loginRouter)
+app.use(bodyParser.json());
+app.use(cors());
+app.use(loginRouter);
+app.use(productRouter);
 
-app.listen(process.env.PORT, () => console.log("Server is running on port 3001"))
+app.listen(process.env.PORT, () => console.log('server running on port 3001'));
