@@ -16,15 +16,11 @@ export const login = async (username, password) => {
 export const register = async (
   username,
   password,
-  // firstName,
-  // lastName,
 ) => {
   try {
     const response = await instance.post("/register", {
       username,
       password,
-      // firstName,
-      // lastName,
     });
     return response.data;
   } catch (error) {

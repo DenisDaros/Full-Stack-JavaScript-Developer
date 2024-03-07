@@ -1,7 +1,7 @@
 // src/pages/ProductsPage.js
 import React, { useState, useEffect } from 'react';
 
-import AddProduct from '../components/Add.Products';
+import AddProduct from '../components/AddProducts';
 
 import { getProducts, deleteProducts, updateProduct } from '../api/integration';
 
@@ -14,6 +14,7 @@ const Products = () => {
   const fetchProducts = async () => {
     try {
       const productsData = await getProducts();
+      console.log(productsData.rows)
       setProducts(productsData.rows);
     } catch (error) {
       console.error("Error fetching products:", error);
