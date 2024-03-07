@@ -31,7 +31,7 @@ const loginController = {
             
             res.json(rows);
         } catch (error) {
-            res.json({ error });
+            res.status(500).json({ msg: 'Erro ao criar usuário', error: error.message });
         }
     },
 };

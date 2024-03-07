@@ -4,10 +4,9 @@ const productController = {
     getAll: async (req, res) => {
         try {
             const { rows } = await postgre.query('select * from products');
-            console.log('teste');
-            res.json({ rows });
+            res.json(rows);
         } catch (error) {
-            res.json({ msg: error.msg });
+            return res.status(500).json({ msg: 'Erro ao lista os produtos', error: error.message });
         }
     },
     create: async (req, res) => {
@@ -17,7 +16,7 @@ const productController = {
                 const { rows } = await postgre.query(sql, [name, brand, model, price, color]);
                 res.json(rows);    
         } catch (error) {
-            res.json({ error });
+            return res.status(500).json({ msg: 'Erro ao excluir o produto', error: error.message });
         }
     },
     updateByName: async (req, res) => {
@@ -26,10 +25,9 @@ const productController = {
             const sql = 'UPDATE products set name = $1, brand = $2, model = $3, price = $4, color = $5 where id = $6 RETURNING *';
 
             const { rows } = await postgre.query(sql, [name, brand, model, price, color, req.params.id]);
-            console.log({ rows });
-            res.json({ rows });
+            res.json(rows);
         } catch (error) {
-            res.json({ msg: error.msg });
+            return res.status(500).json({ msg: 'Erro ao atualizar o produto', error: error.message });
         }
     },
     deleteByName: async (req, res) => {
@@ -39,12 +37,12 @@ const productController = {
             const { rows } = await postgre.query(sql, [req.params.id]);
 
             if (rows[0]) {
-                return res.json({ rows });
+                return res.json(rows);
             }
 
             return res.status(404).json({ msg: 'not found' });
         } catch (error) {
-            res.json({ msg: error.msg });
+            return res.status(500).json({ msg: 'Erro ao excluir o produto', error: error.message });
         }
     },
 };
