@@ -1,7 +1,7 @@
 // src/pages/ProductsPage.js
 import React, { useState, useEffect } from 'react';
 
-import AddProduct from '../components/AddProducts';
+import AddProduct from '../components/Add.Products';
 
 import { getProducts, deleteProducts, updateProduct } from '../api/integration';
 
